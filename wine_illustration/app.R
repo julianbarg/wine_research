@@ -68,6 +68,12 @@ ui <- fluidPage(
                   checkboxInput("plot_onoff",
                                 "Show datapoints",
                                 TRUE),
+                  checkboxInput("rug",
+                                "Show rug",
+                                FALSE),
+                  checkboxInput("density_onoff",
+                                "Show density",
+                                FALSE),
                   selectInput("shape",
                               "Shape indicates:",
                               choices = c("Vineyard/Winery", "Certifier", "Organic/Biodynamic"),
@@ -91,10 +97,7 @@ ui <- fluidPage(
                               max = 0.15,
                               step = 0.01,
                               ticks = FALSE,
-                              value = 0),
-                  checkboxInput("density_onoff",
-                                "Show density",
-                                FALSE)
+                              value = 0)
                   ),
                  
          
@@ -162,10 +165,13 @@ server <- function(input, output) {
                                             height = input$jitter))
     }
     
+    if (input$rug) {
+      map <- map + geom_rug(alpha = 0.2)
+    }
+    
     if (input$density_onoff) {
       map <- map +
         geom_density2d()
-        
     }
     
     map
