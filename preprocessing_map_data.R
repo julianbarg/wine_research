@@ -34,6 +34,7 @@ map_data$Name <- as.character(map_data$Name)
 map_data$Former_names <- as.character(map_data$Former_names)
 map_data$Address <- as.character(map_data$Address)
 map_data$City <- as.character(map_data$City)
+map_loc$Certifier <- droplevels(map_loc$Certifier)
 
 
 # Check vineyards/wineries that lost certification

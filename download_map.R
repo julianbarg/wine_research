@@ -18,6 +18,8 @@ roadmap <- get_map("California", zoom = 6, source = "google",
                       maptype = "roadmap")  # Using Google Maps.
 toner_lite <- get_map("California", zoom = 6, source = "google", 
                        maptype = "toner-lite") # Using Stamen.
+toner_lines <- get_map("California", zoom = 6, source = "google", 
+                       maptype = "toner-lines")
 ggmap(roadmap)
 ggmap(toner_lite)
 
@@ -39,41 +41,8 @@ map_loc$lon <- ifelse(is.na(map_loc$lon), missing$lon[missing$Name %in% map_loc$
 map_loc$lat <- ifelse(is.na(map_loc$lat), missing$lat[missing$Name %in% map_loc$Name], map_loc$lat)
 
 
-# Old code
-
-# # Distinguish vineyards/wineries/both
-# map_loc$Type <- NA
-# map_loc$Type <- ifelse(!is.na(map_loc$Crops), "Vineyard", map_loc$Type)
-# map_loc$Type <- ifelse(!is.na(map_loc$Handling_products), "Winery", map_loc$Type)
-# map_loc$Type <- ifelse(!is.na(map_loc$Crops) & !is.na(map_loc$Handling_products), 
-#                        "Vineyard & Winery", map_loc$Type)
-# 
-# 
-# # Test map
-# ggmap(roadmap, base_layer = ggplot(map_loc, aes(lon, lat))) +
-#   geom_point(aes(shape = Type, color = Type), size = 3, alpha = 0.5)
-# 
-# 
-# # Prepare time
-# library(lubridate)
-# 
-# 
-# 
-# # Retain only necessary columns
-# final_loc <- map_loc[ ,c(1, 2, 3, 7, 10, 17, 18, 19)]
-# final_loc$Type <- as.factor(final_loc$Type)
-
-
-# Test map
-# ggmap(roadmap, base_layer = ggplot(map_loc, aes(lon, lat))) +
-#   geom_point(aes(shape = Type, color = Type), size = 3, alpha = 0.5)
-
-
-# New code
-# We reduce the amount of preprocessing carried out in this step, because some 
-# organizations get certified as one before the other. Therefore, after we determine
-# time, we figure out whether it is an organic winery and/or vineyard.
-
+# Added droplevels here & in preprocessing, could be removed here.
+map_loc$Certifier <- droplevels(map_loc$Certifier)
 final_loc <- map_loc[ ,c(-4, -5, -8)]
 
 
@@ -87,6 +56,8 @@ final_loc <- map_loc[ ,c(-4, -5, -8)]
 save(roadmap, file = "roadmap.RData")
 save(toner_lite, file = "toner_lite.RData")
 save(final_loc, file = "final_loc.RData")
+save(toner_lines, file = "toner_lines.RData")
 save(roadmap, file = "wine_illustration/roadmap.RData")
 save(toner_lite, file = "wine_illustration/toner_lite.RData")
 save(final_loc, file = "wine_illustration/final_loc.RData")
+save(toner_lines, file = "wine_illustration/toner_lines.RData")
