@@ -83,7 +83,7 @@ ui <- fluidPage(
                               min = 1,
                               max = 10,
                               ticks = FALSE,
-                              value = 3),
+                              value = 1),
                   sliderInput("transparency",
                               "Transparency:",
                               min = 0.1,
@@ -97,7 +97,7 @@ ui <- fluidPage(
                               max = 0.15,
                               step = 0.01,
                               ticks = FALSE,
-                              value = 0)
+                              value = 0.09)
                   ),
                  
          
@@ -176,7 +176,7 @@ server <- function(input, output) {
     
     map
     
-  }, width = 800, height = 800)
+  }, width = 6000, height = 6000, res = 300)
   
   # 
   # output$display_table <- DT::renderDataTable({
