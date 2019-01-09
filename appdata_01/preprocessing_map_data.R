@@ -1,6 +1,6 @@
 # Read data
 library(gdata)
-full_dataset <- read.xls("USDA Certified (Wine) 2018.10.04.xlsx", 
+full_dataset <- read.xls("data/USDA Certified (Wine) 2018.10.04.xlsx", 
                          check.names = FALSE, na.strings = c("", "NA"))
 
 
