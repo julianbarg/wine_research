@@ -1,0 +1,16 @@
+---
+title: "Project Requirements"
+author: "Julian Barg"
+date: "January 9, 2019"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This is a list of the data we will pull together for the purpose of this project:
+1. 
+
