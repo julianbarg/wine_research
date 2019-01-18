@@ -1,13 +1,13 @@
-2019-01-18 16:57:55 [scrapy.utils.log] INFO: Scrapy 1.5.1 started (bot: wine_research)
-2019-01-18 16:57:55 [scrapy.utils.log] INFO: Versions: lxml 4.3.0.0, libxml2 2.9.9, cssselect 1.0.3, parsel 1.5.1, w3lib 1.20.0, Twisted 18.9.0, Python 3.6.7 (default, Oct 22 2018, 11:32:17) - [GCC 8.2.0], pyOpenSSL 18.0.0 (OpenSSL 1.1.0j  20 Nov 2018), cryptography 2.4.2, Platform Linux-4.15.0-43-generic-x86_64-with-Ubuntu-18.04-bionic
-2019-01-18 16:57:55 [scrapy.crawler] INFO: Overridden settings: {'BOT_NAME': 'wine_research', 'DOWNLOAD_DELAY': 1, 'FEED_FORMAT': 'csv', 'FEED_URI': 'biodynamic_history.csv', 'NEWSPIDER_MODULE': 'wine_research.spiders', 'SPIDER_MODULES': ['wine_research.spiders']}
-2019-01-18 16:57:55 [scrapy.middleware] INFO: Enabled extensions:
+2019-01-18 17:41:03 [scrapy.utils.log] INFO: Scrapy 1.5.1 started (bot: wine_research)
+2019-01-18 17:41:03 [scrapy.utils.log] INFO: Versions: lxml 4.3.0.0, libxml2 2.9.9, cssselect 1.0.3, parsel 1.5.1, w3lib 1.20.0, Twisted 18.9.0, Python 3.6.7 (default, Oct 22 2018, 11:32:17) - [GCC 8.2.0], pyOpenSSL 18.0.0 (OpenSSL 1.1.0j  20 Nov 2018), cryptography 2.4.2, Platform Linux-4.15.0-43-generic-x86_64-with-Ubuntu-18.04-bionic
+2019-01-18 17:41:03 [scrapy.crawler] INFO: Overridden settings: {'BOT_NAME': 'wine_research', 'DOWNLOAD_DELAY': 1, 'FEED_FORMAT': 'csv', 'FEED_URI': 'biodynamic_history.csv', 'NEWSPIDER_MODULE': 'wine_research.spiders', 'SPIDER_MODULES': ['wine_research.spiders']}
+2019-01-18 17:41:03 [scrapy.middleware] INFO: Enabled extensions:
 ['scrapy.extensions.corestats.CoreStats',
  'scrapy.extensions.telnet.TelnetConsole',
  'scrapy.extensions.memusage.MemoryUsage',
  'scrapy.extensions.feedexport.FeedExporter',
  'scrapy.extensions.logstats.LogStats']
-2019-01-18 16:57:55 [scrapy.middleware] INFO: Enabled downloader middlewares:
+2019-01-18 17:41:03 [scrapy.middleware] INFO: Enabled downloader middlewares:
 ['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
  'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
  'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
@@ -19,85 +19,488 @@
  'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
  'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
  'scrapy.downloadermiddlewares.stats.DownloaderStats']
-2019-01-18 16:57:55 [scrapy.middleware] INFO: Enabled spider middlewares:
+2019-01-18 17:41:03 [scrapy.middleware] INFO: Enabled spider middlewares:
 ['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
  'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
  'scrapy.spidermiddlewares.referer.RefererMiddleware',
  'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
  'scrapy.spidermiddlewares.depth.DepthMiddleware']
-Unhandled error in Deferred:
-2019-01-18 16:57:55 [twisted] CRITICAL: Unhandled error in Deferred:
-
+2019-01-18 17:41:03 [scrapy.middleware] INFO: Enabled item pipelines:
+['wine_research.pipelines.BiodynamicHistoryPipeline']
+2019-01-18 17:41:03 [scrapy.core.engine] INFO: Spider opened
+2019-01-18 17:41:03 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2019-01-18 17:41:03 [scrapy.extensions.telnet] DEBUG: Telnet console listening on 127.0.0.1:6024
+2019-01-18 17:41:05 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/a> (referer: None)
+2019-01-18 17:41:06 [scrapy.core.scraper] ERROR: Error processing {'acreage': '',
+ 'address': '555 College Avenue\nAngwin, CA 94508',
+ 'business': '',
+ 'category': '',
+ 'crops': '',
+ 'date': datetime.date(2014, 10, 9),
+ 'email': '',
+ 'link': ['https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/biodynamic/adamvs'],
+ 'name': ['ADAMVS'],
+ 'phone': '',
+ 'processed_products': '',
+ 'profile': '',
+ 'state': [],
+ 'vineyard': '',
+ 'website': '',
+ 'winery': ''}
 Traceback (most recent call last):
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/crawler.py", line 171, in crawl
-    return self._crawl(crawler, *args, **kwargs)
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/crawler.py", line 175, in _crawl
-    d = crawler.crawl(*args, **kwargs)
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 1613, in unwindGenerator
-    return _cancellableInlineCallbacks(gen)
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 1529, in _cancellableInlineCallbacks
-    _inlineCallbacks(None, g, status)
---- <exception caught here> ---
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 1418, in _inlineCallbacks
-    result = g.send(result)
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/crawler.py", line 80, in crawl
-    self.engine = self._create_engine()
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/crawler.py", line 105, in _create_engine
-    return ExecutionEngine(self, lambda _: self.stop())
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/core/engine.py", line 70, in __init__
-    self.scraper = Scraper(crawler)
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/core/scraper.py", line 71, in __init__
-    self.itemproc = itemproc_cls.from_crawler(crawler)
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/middleware.py", line 58, in from_crawler
-    return cls.from_settings(crawler.settings, crawler)
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/middleware.py", line 34, in from_settings
-    mwcls = load_object(clspath)
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/utils/misc.py", line 44, in load_object
-    mod = import_module(module)
-  File "/usr/lib/python3.6/importlib/__init__.py", line 126, in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
-    
-  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
-    
-  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
-    
-  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
-    
-  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
-    
-  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
-    
-  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 47, in <module>
-    test.splitlines()[1].split(', ')[1].split(' ')[0]
-builtins.NameError: name 'test' is not defined
-
-2019-01-18 16:57:55 [twisted] CRITICAL: 
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 51, in process_item
+    if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/item.py", line 59, in __getitem__
+    return self._values[key]
+KeyError: 'description'
+2019-01-18 17:41:06 [scrapy.core.scraper] ERROR: Error processing {'acreage': '',
+ 'address': 'Villa Nueva\nNaranjito, Puntarenas',
+ 'business': '',
+ 'category': '',
+ 'crops': '',
+ 'date': datetime.date(2014, 10, 9),
+ 'email': '',
+ 'link': ['https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/biodynamic/alquimia-agricola'],
+ 'name': ['Alquimia Agricola'],
+ 'phone': '',
+ 'processed_products': '',
+ 'profile': '',
+ 'state': [],
+ 'vineyard': '',
+ 'website': '',
+ 'winery': ''}
 Traceback (most recent call last):
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 1418, in _inlineCallbacks
-    result = g.send(result)
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/crawler.py", line 80, in crawl
-    self.engine = self._create_engine()
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/crawler.py", line 105, in _create_engine
-    return ExecutionEngine(self, lambda _: self.stop())
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/core/engine.py", line 70, in __init__
-    self.scraper = Scraper(crawler)
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/core/scraper.py", line 71, in __init__
-    self.itemproc = itemproc_cls.from_crawler(crawler)
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/middleware.py", line 58, in from_crawler
-    return cls.from_settings(crawler.settings, crawler)
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/middleware.py", line 34, in from_settings
-    mwcls = load_object(clspath)
-  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/utils/misc.py", line 44, in load_object
-    mod = import_module(module)
-  File "/usr/lib/python3.6/importlib/__init__.py", line 126, in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
-  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
-  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
-  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
-  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
-  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
-  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 47, in <module>
-    test.splitlines()[1].split(', ')[1].split(' ')[0]
-NameError: name 'test' is not defined
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 51, in process_item
+    if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/item.py", line 59, in __getitem__
+    return self._values[key]
+KeyError: 'description'
+2019-01-18 17:41:06 [scrapy.core.scraper] ERROR: Error processing {'acreage': '',
+ 'address': '5401 South Wentworth, Unit 19\nChicago, IL 60609',
+ 'business': '',
+ 'category': '',
+ 'crops': '',
+ 'date': datetime.date(2014, 10, 9),
+ 'email': '',
+ 'link': ['https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/biodynamic/good-food-organics'],
+ 'name': ['Ambassador Organics'],
+ 'phone': '',
+ 'processed_products': '',
+ 'profile': '',
+ 'state': [],
+ 'vineyard': '',
+ 'website': '',
+ 'winery': ''}
+Traceback (most recent call last):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 51, in process_item
+    if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/item.py", line 59, in __getitem__
+    return self._values[key]
+KeyError: 'description'
+2019-01-18 17:41:06 [scrapy.core.scraper] ERROR: Error processing {'acreage': '',
+ 'address': '510 Sequoia Lane\nTempleton, CA 93465',
+ 'business': '',
+ 'category': '',
+ 'crops': '',
+ 'date': datetime.date(2014, 10, 9),
+ 'email': '',
+ 'link': ['https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/biodynamic/ambyth-estate'],
+ 'name': ['AmByth Estate'],
+ 'phone': '',
+ 'processed_products': '',
+ 'profile': '',
+ 'state': [],
+ 'vineyard': '',
+ 'website': '',
+ 'winery': ''}
+Traceback (most recent call last):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 51, in process_item
+    if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/item.py", line 59, in __getitem__
+    return self._values[key]
+KeyError: 'description'
+2019-01-18 17:41:06 [scrapy.core.scraper] ERROR: Error processing {'acreage': '',
+ 'address': '312 North Ninth St.\nLompoc, CA 93436',
+ 'business': '',
+ 'category': '',
+ 'crops': '',
+ 'date': datetime.date(2014, 10, 9),
+ 'email': '',
+ 'link': ['https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/biodynamic/ampelos-vineyards'],
+ 'name': ['Ampelos Cellars'],
+ 'phone': '',
+ 'processed_products': '',
+ 'profile': '',
+ 'state': [],
+ 'vineyard': '',
+ 'website': '',
+ 'winery': ''}
+Traceback (most recent call last):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 51, in process_item
+    if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/item.py", line 59, in __getitem__
+    return self._values[key]
+KeyError: 'description'
+2019-01-18 17:41:06 [scrapy.core.scraper] ERROR: Error processing {'acreage': '',
+ 'address': '1650 Corporate Circle Suite 200\nPetaluma, CA 94955',
+ 'business': '',
+ 'category': '',
+ 'crops': '',
+ 'date': datetime.date(2014, 10, 9),
+ 'email': '',
+ 'link': ['https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/biodynamic/amy-s-kitchen'],
+ 'name': ["Amy's Kitchen"],
+ 'phone': '',
+ 'processed_products': '',
+ 'profile': '',
+ 'state': [],
+ 'vineyard': '',
+ 'website': '',
+ 'winery': ''}
+Traceback (most recent call last):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 51, in process_item
+    if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/item.py", line 59, in __getitem__
+    return self._values[key]
+KeyError: 'description'
+2019-01-18 17:41:06 [scrapy.core.scraper] ERROR: Error processing {'acreage': '',
+ 'address': '1931 Route 9\nGermantown, NY 12526',
+ 'business': '',
+ 'category': '',
+ 'crops': '',
+ 'date': datetime.date(2014, 10, 9),
+ 'email': '',
+ 'link': ['https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/biodynamic/angello-s-distributing-inc'],
+ 'name': ["Angello's Distributing, Inc."],
+ 'phone': '',
+ 'processed_products': '',
+ 'profile': '',
+ 'state': [],
+ 'vineyard': '',
+ 'website': '',
+ 'winery': ''}
+Traceback (most recent call last):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 51, in process_item
+    if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/item.py", line 59, in __getitem__
+    return self._values[key]
+KeyError: 'description'
+2019-01-18 17:41:06 [scrapy.core.scraper] ERROR: Error processing {'acreage': '',
+ 'address': '10700 Broadway Road\nMoorpark, CA 93021',
+ 'business': '',
+ 'category': '',
+ 'crops': '',
+ 'date': datetime.date(2014, 10, 9),
+ 'email': '',
+ 'link': ['https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/biodynamic/apricot-lane-farms'],
+ 'name': ['Apricot Lane Farms'],
+ 'phone': '',
+ 'processed_products': '',
+ 'profile': '',
+ 'state': [],
+ 'vineyard': '',
+ 'website': '',
+ 'winery': ''}
+Traceback (most recent call last):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 51, in process_item
+    if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/item.py", line 59, in __getitem__
+    return self._values[key]
+KeyError: 'description'
+2019-01-18 17:41:06 [scrapy.core.scraper] ERROR: Error processing {'acreage': '',
+ 'address': '3270 W. Post Road\nLas Vegas, NV 89118',
+ 'business': '',
+ 'category': '',
+ 'crops': '',
+ 'date': datetime.date(2014, 10, 9),
+ 'email': '',
+ 'link': ['https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/biodynamic/aqueous-labs-inc'],
+ 'name': ['Aqueous Labs, Inc.'],
+ 'phone': '',
+ 'processed_products': '',
+ 'profile': '',
+ 'state': [],
+ 'vineyard': '',
+ 'website': '',
+ 'winery': ''}
+Traceback (most recent call last):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 51, in process_item
+    if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/item.py", line 59, in __getitem__
+    return self._values[key]
+KeyError: 'description'
+2019-01-18 17:41:06 [scrapy.core.scraper] ERROR: Error processing {'acreage': '',
+ 'address': '2155 Pickett Road\nCalistoga, CA 94515',
+ 'business': '',
+ 'category': '',
+ 'crops': '',
+ 'date': datetime.date(2014, 10, 9),
+ 'email': '',
+ 'link': ['https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/biodynamic/araujo-estate'],
+ 'name': ['Araujo Estate'],
+ 'phone': '',
+ 'processed_products': '',
+ 'profile': '',
+ 'state': [],
+ 'vineyard': '',
+ 'website': '',
+ 'winery': ''}
+Traceback (most recent call last):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 51, in process_item
+    if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/item.py", line 59, in __getitem__
+    return self._values[key]
+KeyError: 'description'
+2019-01-18 17:41:06 [scrapy.core.scraper] ERROR: Error processing {'acreage': '',
+ 'address': '8020 Hygiene Road\nLongmont, CO 80503',
+ 'business': '',
+ 'category': '',
+ 'crops': '',
+ 'date': datetime.date(2014, 10, 9),
+ 'email': '',
+ 'link': ['https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/biodynamic/aspen-moon-farm-llc'],
+ 'name': ['Aspen Moon Farm, LLC'],
+ 'phone': '',
+ 'processed_products': '',
+ 'profile': '',
+ 'state': [],
+ 'vineyard': '',
+ 'website': '',
+ 'winery': ''}
+Traceback (most recent call last):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 51, in process_item
+    if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/item.py", line 59, in __getitem__
+    return self._values[key]
+KeyError: 'description'
+2019-01-18 17:41:06 [scrapy.core.scraper] ERROR: Error processing {'acreage': '',
+ 'address': '219 Mill Street\nRockport, ME 04856',
+ 'business': '',
+ 'category': '',
+ 'crops': '',
+ 'date': datetime.date(2014, 10, 9),
+ 'email': '',
+ 'link': ['https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/biodynamic/avena-botanicals'],
+ 'name': ['Avena Botanicals'],
+ 'phone': '',
+ 'processed_products': '',
+ 'profile': '',
+ 'state': [],
+ 'vineyard': '',
+ 'website': '',
+ 'winery': ''}
+Traceback (most recent call last):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 51, in process_item
+    if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/item.py", line 59, in __getitem__
+    return self._values[key]
+KeyError: 'description'
+2019-01-18 17:41:07 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://web.archive.org/web/20151023010146/http://www.biodynamicfood.org:80/biodynamic/ampelos-vineyards> from <GET https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/biodynamic/ampelos-vineyards>
+2019-01-18 17:41:08 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://web.archive.org/web/20151023010141/http://www.biodynamicfood.org:80/biodynamic/ambyth-estate> from <GET https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/biodynamic/ambyth-estate>
+2019-01-18 17:41:10 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://web.archive.org/web/20150514111746/http://www.biodynamicfood.org:80/biodynamic/good-food-organics> from <GET https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/biodynamic/good-food-organics>
+2019-01-18 17:41:10 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://web.archive.org/web/20151023010136/http://www.biodynamicfood.org:80/biodynamic/alquimia-agricola> from <GET https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/biodynamic/alquimia-agricola>
+2019-01-18 17:41:11 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://web.archive.org/web/20150105045512/http://www.biodynamicfood.org:80/biodynamic/adamvs> from <GET https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/biodynamic/adamvs>
+2019-01-18 17:41:12 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://web.archive.org/web/20151022184754/http://www.biodynamicfood.org:80/beyond-organic/u> from <GET https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/u>
+2019-01-18 17:41:14 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://web.archive.org/web/20151022184749/http://www.biodynamicfood.org:80/beyond-organic/t> from <GET https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/t>
+2019-01-18 17:41:15 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://web.archive.org/web/20160715074049/http://www.biodynamicfood.org:80/beyond-organic/s> from <GET https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/s>
+2019-01-18 17:41:16 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://web.archive.org/web/20151022184743/http://www.biodynamicfood.org:80/beyond-organic/r> from <GET https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/r>
+2019-01-18 17:41:18 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://web.archive.org/web/20151022184732/http://www.biodynamicfood.org:80/beyond-organic/p> from <GET https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/p>
+2019-01-18 17:41:19 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://web.archive.org/web/20151022184727/http://www.biodynamicfood.org:80/beyond-organic/o> from <GET https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/o>
+2019-01-18 17:41:20 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://web.archive.org/web/20151022184722/http://www.biodynamicfood.org:80/beyond-organic/n> from <GET https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/n>
+2019-01-18 17:41:22 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://web.archive.org/web/20151022032820/http://www.biodynamicfood.org:80/beyond-organic/m> from <GET https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/m>
+2019-01-18 17:41:22 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://web.archive.org/web/20151022184738/http://www.biodynamicfood.org:80/beyond-organic/q> from <GET https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/q>
+2019-01-18 17:41:23 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://web.archive.org/web/20151022032815/http://www.biodynamicfood.org:80/beyond-organic/l> from <GET https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/l>
+2019-01-18 17:41:24 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://web.archive.org/web/20151022032810/http://www.biodynamicfood.org:80/beyond-organic/k> from <GET https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/k>
+2019-01-18 17:41:26 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://web.archive.org/web/20151023010146/http://www.biodynamicfood.org:80/biodynamic/ampelos-vineyards> (referer: https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/a)
+2019-01-18 17:41:26 [scrapy.core.scraper] ERROR: Error processing {'acreage': '82 Acres',
+ 'address': '312 North Ninth St.\nLompoc, CA 93436, United States',
+ 'business': ['Winery | '],
+ 'category': ['Winery | '],
+ 'crops': 'Fruit,Grapes For Wine',
+ 'date': datetime.date(2015, 10, 23),
+ 'email': [''],
+ 'link': ['https://web.archive.org/web/20151023010146/http://www.biodynamicfood.org:80/biodynamic/ampelos-vineyards'],
+ 'name': ['Ampelos Cellars'],
+ 'phone': '805-736-9957',
+ 'processed_products': '',
+ 'profile': 'Ampelos is the greek word for vine. Soil. Vines. Wines.  This is '
+            'the order in which we do business. Waking up from the dream is '
+            'the real belief that a farmer must know his fruit, and we are '
+            'resolute in our passion to produce hands on, minimally invasive '
+            'wines that both whisper and shout about the terroir from which '
+            'they are grown.  Our vineyard is one of the first to be certified '
+            'sustainability in practice, organic and biodynamic.  Our '
+            'commitment to eco-friendly, natural farming and winemaking is '
+            'evident in every sip.\n'
+            'Please join us at our tasting room in the Lompoc Wine Ghetto or '
+            'at The Wine Saloon in Los Alamos, CA.\n'
+            'Cropped: 25 Acres\n'
+            'Total Acreage: 82 Acres',
+ 'state': [],
+ 'vineyard': True,
+ 'website': ['ampeloscellars.com'],
+ 'winery': ''}
+Traceback (most recent call last):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 51, in process_item
+    if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/item.py", line 59, in __getitem__
+    return self._values[key]
+KeyError: 'description'
+2019-01-18 17:41:27 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://web.archive.org/web/20151023010141/http://www.biodynamicfood.org:80/biodynamic/ambyth-estate> (referer: https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/a)
+2019-01-18 17:41:28 [scrapy.core.scraper] ERROR: Error processing {'acreage': '42 Acres',
+ 'address': '510 Sequoia Lane\nTempleton, CA 93465, United States',
+ 'business': ['Vineyard | Farm | Winery | '],
+ 'category': ['Vineyard | Farm | Winery | '],
+ 'crops': 'Fruit,Grapes For Wine,Olives',
+ 'date': datetime.date(2015, 10, 23),
+ 'email': [''],
+ 'link': ['https://web.archive.org/web/20151023010141/http://www.biodynamicfood.org:80/biodynamic/ambyth-estate'],
+ 'name': ['AmByth Estate'],
+ 'phone': '805-305-9497',
+ 'processed_products': 'Wine,Wine Red,Wine Rosé,Wine White',
+ 'profile': 'AmByth Estate (welsh) "forever" is owned by a  husband and wife '
+            'farming and winemaking team in the Paso Robles AVA (CA). We farm '
+            'our vines, olive trees, and gardens and raise our animals and '
+            'bees based on Biodynamic principles. We make Demeter certified '
+            'wine, with zero added sulfites that are aged in amphora, '
+            'stainless steel and neutral oak. We produce Rhone wines: single '
+            'varietals and blends (white, orange, rose, and red) and '
+            'Sangiovese, Tempranillo and Zinfandel.\n'
+            'Our Philosophy: A love of the land. A joy of life.\n'
+            'Cropped: 17 Acres\n'
+            'Total Acreage: 42 Acres',
+ 'state': [],
+ 'vineyard': True,
+ 'website': ['www.ambythestate.com'],
+ 'winery': True}
+Traceback (most recent call last):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 51, in process_item
+    if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/item.py", line 59, in __getitem__
+    return self._values[key]
+KeyError: 'description'
+2019-01-18 17:41:29 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://web.archive.org/web/20150514111746/http://www.biodynamicfood.org:80/biodynamic/good-food-organics> (referer: https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/a)
+2019-01-18 17:41:29 [scrapy.core.scraper] ERROR: Error processing {'acreage': '',
+ 'address': '5401 South Wentworth, Unit 19\nChicago, IL 60609, United States',
+ 'business': ['Organic Beverages | Biodynamic | '],
+ 'category': ['Organic Beverages | Biodynamic | '],
+ 'crops': '',
+ 'date': datetime.date(2015, 5, 14),
+ 'email': ['www.ambassadororganics.com'],
+ 'link': ['https://web.archive.org/web/20150514111746/http://www.biodynamicfood.org:80/biodynamic/good-food-organics'],
+ 'name': ['Ambassador Organics'],
+ 'phone': '773-536-5300',
+ 'processed_products': 'Coffee And Instant Beverages,Cocoa '
+                       'Ground,Decaffeinated Coffee,Roasted Coffee '
+                       'Ground,Roasted Coffee Whole,Oils And Fats,Olive '
+                       'Oil,Tea,Herbal Tea,Green Tea,White Tea,Speciality '
+                       'Teas,Tea Mixtures',
+ 'profile': 'The Ambassador Organics™ brand consists of premium organic foods '
+            'made from the finest certified organic and Biodynamic® products '
+            'and ingredients available in the world. Ambassador Organics™ '
+            'directly participates in providing farmers with markets in which '
+            'they can maintain the dignity of their work and the integrity of '
+            'their farm. The company translates these values into great '
+            'tasting and convenient products that respect the time pressures '
+            'and lifestyles of American consumers. The brand also reflects the '
+            'economic, social and philosophical commitment to doing well while '
+            'doing good. It functions as a transparent financial engine that '
+            'respects and promotes the source of food and its producers.',
+ 'state': [],
+ 'vineyard': '',
+ 'website': [''],
+ 'winery': ''}
+Traceback (most recent call last):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 51, in process_item
+    if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/item.py", line 59, in __getitem__
+    return self._values[key]
+KeyError: 'description'
+2019-01-18 17:41:30 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://web.archive.org/web/20151023010136/http://www.biodynamicfood.org:80/biodynamic/alquimia-agricola> (referer: https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/a)
+2019-01-18 17:41:30 [scrapy.core.scraper] ERROR: Error processing {'acreage': '187 Acres',
+ 'address': 'Villa Nueva\nNaranjito, Puntarenas, Costa Rica',
+ 'business': '',
+ 'category': [''],
+ 'crops': 'Herbs And '
+          'Spices,Allspice,Basil,Cardamom,Cinnamon,Curcuma,Ginger,Hibiscus,Oregano,Pepper '
+          'Spice,Vanilla,Other Crops,Cocoa,Other Permanent Crops',
+ 'date': datetime.date(2015, 10, 23),
+ 'email': [''],
+ 'link': ['https://web.archive.org/web/20151023010136/http://www.biodynamicfood.org:80/biodynamic/alquimia-agricola'],
+ 'name': ['Alquimia Agricola'],
+ 'phone': '506-2232-8552',
+ 'processed_products': '',
+ 'profile': 'Cropped: 37 Acres\nTotal Acreage: 187 Acres',
+ 'state': [],
+ 'vineyard': '',
+ 'website': [''],
+ 'winery': ''}
+Traceback (most recent call last):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 51, in process_item
+    if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/item.py", line 59, in __getitem__
+    return self._values[key]
+KeyError: 'description'
+2019-01-18 17:41:31 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://web.archive.org/web/20150105045512/http://www.biodynamicfood.org:80/biodynamic/adamvs> (referer: https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/a)
+2019-01-18 17:41:31 [scrapy.core.scraper] ERROR: Error processing {'acreage': '',
+ 'address': '555 College Avenue\nAngwin, CA 94508, United States',
+ 'business': '',
+ 'category': [''],
+ 'crops': 'Fruit,Grapes For Wine',
+ 'date': datetime.date(2015, 1, 5),
+ 'email': [''],
+ 'link': ['https://web.archive.org/web/20150105045512/http://www.biodynamicfood.org:80/biodynamic/adamvs'],
+ 'name': ['ADAMVS'],
+ 'phone': '707-965-0516',
+ 'processed_products': '',
+ 'profile': '',
+ 'state': [],
+ 'vineyard': True,
+ 'website': [''],
+ 'winery': ''}
+Traceback (most recent call last):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/twisted/internet/defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "/home/julian/PycharmProjects/wine_research/wine_research/pipelines.py", line 51, in process_item
+    if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+  File "/home/julian/PycharmProjects/wine_research/venv/lib/python3.6/site-packages/scrapy/item.py", line 59, in __getitem__
+    return self._values[key]
+KeyError: 'description'
+2019-01-18 17:41:32 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://web.archive.org/web/20151022184754/http://www.biodynamicfood.org:80/beyond-organic/u> (referer: https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/a)
+2019-01-18 17:41:32 [scrapy.dupefilters] DEBUG: Filtered duplicate request: <GET https://web.archive.org/web/20151022184754/http://www.biodynamicfood.org:80/beyond-organic/u> - no more duplicates will be shown (see DUPEFILTER_DEBUG to show all duplicates)
+2019-01-18 17:41:34 [scrapy.crawler] INFO: Received SIGINT, shutting down gracefully. Send again to force 
+2019-01-18 17:41:34 [scrapy.core.engine] INFO: Closing spider (shutdown)
+2019-01-18 17:41:34 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://web.archive.org/web/20151022184749/http://www.biodynamicfood.org:80/beyond-organic/t> (referer: https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/a)
+2019-01-18 17:41:34 [scrapy.crawler] INFO: Received SIGINT twice, forcing unclean shutdown

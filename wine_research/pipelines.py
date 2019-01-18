@@ -48,22 +48,22 @@ class BiodynamicHistoryPipeline(object):
         if 'wine' in item['processed_products'].lower():
             item['winery'] = True
 
-        if ('wine' in item['description']).lower() and (len(item['crops']) > len(item['processed_products'])):
+        if ('wine' in item['profile']).lower() and (len(item['crops']) > len(item['processed_products'])):
             item['vineyard'] = True
 
-        if ('wine' in item['description']).lower() and (len(item['crops']) < len(item['processed_products'])):
+        if ('wine' in item['profile']).lower() and (len(item['crops']) < len(item['processed_products'])):
             item['winery'] = True
 
         if ('vineyard' in item['name'].lower()) or ('vineyard' in item['business'].lower()):
             item['vineyard'] = True
 
-        if 'vineyard' in item['description'].lower():
+        if 'vineyard' in item['profile'].lower():
             item['vineyard'] = True
 
         if ('winery' in item['name'].lower()) or ('winery' in item['business'].lower()):
             item['winery'] = True
 
-        if 'winery' in item['description'].lower():
+        if 'winery' in item['profile'].lower():
             item['winery'] = True
 
         return item
