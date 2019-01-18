@@ -7,16 +7,21 @@
 
 from scrapy import Item, Field
 
+
+def or_empty(value):
+    return value or ''
+
+
 class BiodynamicHistoryItem(Item):
     # define the fields for your item here like:
     date = Field()
     name = Field()
+    link = Field()
     category = Field()
     address = Field()
     phone = Field()
     email = Field()
     website = Field()
-    short_description = Field()
     acreage = Field()
     profile = Field()
     crops = Field()
