@@ -13,7 +13,6 @@ class BiodynamicHistoryItem(Item):
     date = Field()
     name = Field()
     link = Field()
-    category = Field()
     address = Field()
     state = Field()
     phone = Field()

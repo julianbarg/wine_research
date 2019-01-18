@@ -15,7 +15,7 @@ class BiodynamicHistorySpider(Spider):
             loader = ItemLoader(item=BiodynamicHistoryItem(), selector=organization)
             loader.add_value('date', response.url[28:36])
 
-            name = organization.xpath('(.//a[@class="list_link"])[1]/text()').extract()[0]
+            name = organization.xpath('(.//a[@class="list_link"])[1]/text()').extract_first()
             loader.add_value('name', name)
 
             relative_link = organization.xpath('.//a/@href').extract()[0]
@@ -41,24 +41,6 @@ class BiodynamicHistorySpider(Spider):
         if previous_page:
             yield Request(previous_page, callback=self.parse)
 
-    # def find_organizations(self, response):
-    #     for organization in response.xpath('//*[starts-with(@class, "abc_list_item index")]'):
-    #         loader = ItemLoader(item=BiodynamicHistoryItem(), selector=organization)
-    #         loader.add_value('date', response.url[28:36])
-    #
-    #         name = organization.xpath('(.//a[@class="list_link"])[1]/text()').extract()[0]
-    #         loader.add_value('name', name)
-    #
-    #         relative_link = organization.xpath('.//a/@href').extract()[0]
-    #         link = response.urljoin(relative_link)
-    #         loader.add_value('link', link)
-    #
-    #         address = organization.xpath('.//div/div/div/p/text()').extract()[:2]
-    #         loader.add_value('address', address)
-    #
-    #         yield loader.load_item()
-    #         yield Request(link, callback=self.parse_organizations)
-
     def parse_organization(self, response):
 
         next_record = response.xpath('//*[@class="f"]/a/@href').extract_first()
@@ -74,9 +56,6 @@ class BiodynamicHistorySpider(Spider):
         loader.add_value('date', response.url[28:36])
         loader.add_value('link', response.url)
         loader.add_xpath('name', '//h1/text()')
-
-        category = response.xpath('//h2[@class="business-type"]/text()').extract_first() or ''
-        loader.add_value('category', category)
 
         address = response.xpath('//div[@class="member-address"]/p/text()').extract() or ''
         loader.add_value('address', address)

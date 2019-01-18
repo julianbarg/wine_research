@@ -16,14 +16,20 @@ class BiodynamicHistoryPipeline(object):
         for field in item.fields:
             item.setdefault(field, '')
 
+        # For some reason, scraping the names from the overview page returns a list. Same for business.
+        if isinstance(item['name'], list):
+            item['name'] = item['name'][0]
+        if isinstance(item['business'], list):
+            item['business'] = item['business'][0]
+
         if item['date']:
             item['date'] = datetime.strptime(item['date'][0], '%Y%m%d').date()
 
         if item['address']:
             item['address'] = [element.strip() for element in item['address']]
+            state_pattern = '\w+, (\w{2})\s'
+            item['state'] = re.findall(state_pattern, item['address'][1])
             item['address'] = '\n'.join(item['address'][:2])
-            state_pattern = '\n\w+, (\w{2})\s'
-            item['state'] = re.findall(item['address'], state_pattern)
 
         if item['phone']:
             item['phone'] = item['phone'][0]
@@ -48,10 +54,10 @@ class BiodynamicHistoryPipeline(object):
         if 'wine' in item['processed_products'].lower():
             item['winery'] = True
 
-        if ('wine' in item['profile']).lower() and (len(item['crops']) > len(item['processed_products'])):
+        if ('wine' in item['profile'].lower()) and (len(item['crops']) > len(item['processed_products'])):
             item['vineyard'] = True
 
-        if ('wine' in item['profile']).lower() and (len(item['crops']) < len(item['processed_products'])):
+        if ('wine' in item['profile'].lower()) and (len(item['crops']) < len(item['processed_products'])):
             item['winery'] = True
 
         if ('vineyard' in item['name'].lower()) or ('vineyard' in item['business'].lower()):
