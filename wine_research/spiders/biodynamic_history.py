@@ -105,4 +105,7 @@ class BiodynamicHistorySpider(Spider):
         processed_products = response.xpath('//div[p/*/text()="Processed Product"]//li//text()').extract() or ''
         loader.add_value('processed_products', processed_products)
 
+        business = response.xpath('//*[@class="business-type"]/text()').extract_first()
+        loader.add_value('business', business)
+
         yield loader.load_item()

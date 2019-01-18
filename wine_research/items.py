@@ -23,3 +23,6 @@ class BiodynamicHistoryItem(Item):
     profile = Field()
     crops = Field()
     processed_products = Field()
+    business = Field()
+    vineyard = Field()
+    winery = Field()
