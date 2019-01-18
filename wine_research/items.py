@@ -15,6 +15,7 @@ class BiodynamicHistoryItem(Item):
     link = Field()
     category = Field()
     address = Field()
+    state = Field()
     phone = Field()
     email = Field()
     website = Field()

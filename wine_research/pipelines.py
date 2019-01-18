@@ -7,6 +7,7 @@
 
 
 from datetime import datetime
+import re
 
 
 class BiodynamicHistoryPipeline(object):
@@ -21,6 +22,8 @@ class BiodynamicHistoryPipeline(object):
         if item['address']:
             item['address'] = [element.strip() for element in item['address']]
             item['address'] = '\n'.join(item['address'][:2])
+            state_pattern = '\n\w+, (\w{2})\s'
+            item['state'] = re.findall(item['address'], state_pattern)
 
         if item['phone']:
             item['phone'] = item['phone'][0]
@@ -40,3 +43,5 @@ class BiodynamicHistoryPipeline(object):
             item['processed_products'] = ','.join(item['processed_products'])
 
         return item
+
+test.splitlines()[1].split(', ')[1].split(' ')[0]
