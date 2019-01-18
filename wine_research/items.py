@@ -8,10 +8,6 @@
 from scrapy import Item, Field
 
 
-def or_empty(value):
-    return value or ''
-
-
 class BiodynamicHistoryItem(Item):
     # define the fields for your item here like:
     date = Field()
