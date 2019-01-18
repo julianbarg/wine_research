@@ -43,5 +43,3 @@ class BiodynamicHistoryPipeline(object):
             item['processed_products'] = ','.join(item['processed_products'])
 
         return item
-
-test.splitlines()[1].split(', ')[1].split(' ')[0]
