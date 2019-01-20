@@ -57,7 +57,7 @@ class BiodynamicHistorySpider(Spider):
         loader.add_value('link', response.url)
         loader.add_xpath('name', '//h1/text()')
 
-        address = response.xpath('//div[@class="member-address"]/p/text()').extract() or ''
+        address = response.xpath('//div[@class="member-address"]/p/text()').extract()[:2] or ''
         loader.add_value('address', address)
 
         contact_info = response.xpath('//div[@class="member-address"]/p/text()').extract()

@@ -25,10 +25,12 @@ class BiodynamicHistoryPipeline(object):
         if item['date']:
             item['date'] = datetime.strptime(item['date'][0], '%Y%m%d').date()
 
-        if item['address']:
+        if item['address'] and len(item['address']) == 2:
             item['address'] = [element.strip() for element in item['address']]
             state_pattern = '\w+, (\w{2})\s'
             item['state'] = re.findall(state_pattern, item['address'][1])
+            if len(item['state']) > 1:
+                item['state'] = item['state'][0]
             item['address'] = '\n'.join(item['address'][:2])
 
         if item['phone']:
