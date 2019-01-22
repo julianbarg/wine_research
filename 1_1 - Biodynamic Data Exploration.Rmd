@@ -1,0 +1,135 @@
+---
+title: "1.1 - Biodynamic Data Exploration"
+author: "Julian Barg"
+date: "January 20, 2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. Load data
+```{r load, message=FALSE}
+library(tidyverse)
+library(readr)
+
+biodynamic <- read_csv("downloads/biodynamic_history.csv")
+glimpse(biodynamic)
+```
+
+
+
+## 2. First cleaning
+
+### 2.1 Keep address, date, name, type & acreage
+```{r subset}
+biodynamic <- select(biodynamic, name, date, state, address, vineyard, winery, acreage)
+
+glimpse(biodynamic)
+```
+
+
+
+### 2.2 Clean acreage
+```{r clean_acreage}
+parse_numbers <- "\\d*,?\\d+\\.?\\d*"
+biodynamic$acreage <- str_extract(biodynamic$acreage, parse_numbers)
+biodynamic$acreage <- gsub(",", "", biodynamic$acreage)
+biodynamic$acreage <- as.numeric(biodynamic$acreage)
+head(biodynamic$acreage[!is.na(biodynamic$acreage)])
+```
+
+Further visual inspection of the table confirmed that all entries have been correctly identified.
+
+
+
+### 2.3 Keep only entries for CA
+
+Sort table for visual inspection
+```{r inspect}
+biodynamic <- biodynamic[order(biodynamic$name, biodynamic$date), ]
+```
+
+Visual inspection of the table confirmed that state and address match for all entries, and that no organization has changed address.
+```{r california}
+biodynamic <- biodynamic[which(biodynamic$state == "CA"), ]
+```
+
+
+
+## 3. Fill gaps
+
+We take advantage of the fact that TRUE corresponds to 1 to apply vineyard/winery to all observations for one organization.
+```{r fill_gaps, warning=FALSE}
+biodynamic <- biodynamic %>%
+  group_by(name) %>%
+  mutate(acreage = max(acreage, na.rm = TRUE)) %>%
+  mutate(winery = max(winery, na.rm = TRUE)) %>%
+  mutate(vineyard = max(vineyard, na.rm = TRUE))
+```
+
+We cause values of -Inf which we will replace with NA.
+```{r replace_Inf}
+library(naniar)
+
+biodynamic <- biodynamic %>%
+  replace_with_na(list(vineyard = -Inf, winery = -Inf, acreage = -Inf))
+biodynamic$vineyard <- as.logical(biodynamic$vineyard)
+biodynamic$winery <- as.logical(biodynamic$winery)
+```
+
+
+
+## 4. Keep only vineyards/wineries
+```{r keep_wine}
+biodynamic <- biodynamic[which(biodynamic$vineyard == TRUE | biodynamic$winery == TRUE), ]
+head(biodynamic)
+```
+
+
+
+## 5. Downsample to year
+First, we resample to year. Visual inspection shows no conflicts (except spelling) within companies for any of the entries. We keep the last entry for each company-year observation.
+
+```{r fill_years}
+library(lubridate)
+
+biodynamic <- biodynamic %>%
+  mutate(year = year(date)) %>%
+  group_by(name, year) %>%
+  mutate(last = last(date)) %>%
+  filter(date == last) %>%
+  ungroup() %>%
+  select(-c(year, last))
+
+head(biodynamic, 5)
+```
+
+There are some duplicate entries (same day). The entries differ by nothing,or may have additional entry for "United States" in the address. We therefore apply unique to the dataframe without the address column. We also truncate day & month, and rename date column to year.
+```{r unique}
+biodynamic <- biodynamic[!duplicated(biodynamic[, -5]), ]
+biodynamic$date <- year(biodynamic$date)
+biodynamic <- rename(biodynamic, year=date)
+head(biodynamic)
+```
+
+
+
+## 6. Assume continuous existence
+
+```{r fill}
+for (n in biodynamic$name){
+  from = min(biodynamic[biodynamic$name == n, ]$year)
+  to = max(biodynamic[biodynamic$name == n, ]$year)
+  for (y in from:to){
+    if (!(y %in% biodynamic[biodynamic$name == n, ]$year)){
+      biodynamic <- plyr::rbind.fill(biodynamic, data.frame(name = n, year = y))
+    }
+  }
+}
+```
+
+
+
+## Generate quick map that shows progression (GIF)
