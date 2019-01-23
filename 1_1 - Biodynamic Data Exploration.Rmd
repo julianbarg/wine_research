@@ -108,7 +108,7 @@ head(biodynamic, 5)
 
 There are some duplicate entries (same day). The entries differ by nothing,or may have additional entry for "United States" in the address. We therefore apply unique to the dataframe without the address column. We also truncate day & month, and rename date column to year.
 ```{r unique}
-biodynamic <- biodynamic[!duplicated(biodynamic[, -5]), ]
+biodynamic <- biodynamic[!duplicated(biodynamic[, -4]), ]
 biodynamic$date <- year(biodynamic$date)
 biodynamic <- rename(biodynamic, year=date)
 head(biodynamic)
@@ -117,7 +117,6 @@ head(biodynamic)
 
 
 ## 6. Assume continuous existence
-
 ```{r fill}
 for (n in biodynamic$name){
   from = min(biodynamic[biodynamic$name == n, ]$year)
@@ -130,6 +129,98 @@ for (n in biodynamic$name){
 }
 ```
 
+### 6.1 Backward 
+```{r backward_fill}
+biodynamic <- biodynamic[order(biodynamic$name, biodynamic$year, decreasing=TRUE), ]
+tail(biodynamic)
+
+biodynamic <- biodynamic %>%
+  group_by(name) %>%
+  fill(state, address, vineyard, winery, acreage, .direction = c("down")) %>%
+  ungroup()
+
+head(biodynamic)
+```
 
 
-## Generate quick map that shows progression (GIF)
+## 7. Generate quick map that shows progression (GIF)
+
+### 7.1 Register Google maps API key
+```{r register_api}
+if(!requireNamespace("devtools")) install.packages("devtools")
+devtools::install_github("dkahle/ggmap", ref = "tidyup")
+library(ggmap)
+
+key <- readChar('maps_key.txt', file.info('maps_key.txt')$size)
+register_google(key = key)
+```
+
+
+
+### 7.2 Download map of California
+```{r download_map}
+roadmap <- get_map("California", zoom = 6, source = "google", 
+                      maptype = "roadmap")  # Using Google Maps.
+```
+
+
+
+### 7.3 Get coordinates
+```{r coordinates, message=FALSE}
+biodynamic <- biodynamic %>%
+  mutate_geocode(location = address)
+```
+
+
+
+### 7.4 Generate map 1
+```{r map1}
+library(gganimate)
+biodynamic_temp <- biodynamic
+biodynamic_temp$year <- as.numeric(biodynamic_temp$year)
+
+map1 <- ggmap(roadmap, base_layer = ggplot(biodynamic_temp, aes(lon, lat))) +
+  geom_point(aes(lon, lat), size = 3, alpha = 0.3) +
+  labs(title = 'Year: {frame + 2013}', x = '', y = '') +
+  theme(text = element_text(size=20), 
+        axis.ticks = element_blank(), 
+        axis.text = element_blank()) +
+  transition_manual(year)
+map1
+
+anim_save("map1.gif", map1, height = 550, width = 550)
+```
+
+
+
+### 7.5 Create factor variable for organization type
+```{r factor}
+biodynamic$type <- NA
+biodynamic$type[biodynamic$vineyard] <- "vineyard"
+biodynamic$type[biodynamic$winery] <- "winery"
+biodynamic$type[biodynamic$winery & biodynamic$vineyard] <- "vineyard & winery"
+
+biodynamic$type <- factor(biodynamic$type, ordered = TRUE, levels = c("vineyard", "winery", "vineyard & winery"))
+```
+
+
+
+### 7.6 Generate map2
+```{r map2}
+library(gganimate)
+biodynamic_temp <- biodynamic
+biodynamic_temp$year <- as.numeric(biodynamic_temp$year)
+
+map2 <- ggmap(roadmap, base_layer = ggplot(biodynamic_temp, aes(lon, lat))) +
+  geom_point(aes(lon, lat), size = 3, alpha = 0.3) +
+  facet_wrap(~type) +
+  labs(title = 'Year: {frame + 2013}', x = '', y = '') +
+  theme(text = element_text(size=20), 
+        axis.ticks = element_blank(), 
+        axis.text = element_blank()) +
+  transition_manual(year)
+map2
+
+anim_save("map2.gif", map2, height = 550, width = 1500)
+```
+
