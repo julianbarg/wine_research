@@ -2,7 +2,9 @@
 title: "1.1 - Biodynamic Data Exploration"
 author: "Julian Barg"
 date: "January 20, 2019"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -129,7 +131,7 @@ for (n in biodynamic$name){
 }
 ```
 
-### 6.1 Backward 
+### 6.1 Backward fill
 ```{r backward_fill}
 biodynamic <- biodynamic[order(biodynamic$name, biodynamic$year, decreasing=TRUE), ]
 tail(biodynamic)
@@ -180,7 +182,7 @@ biodynamic_temp <- biodynamic
 biodynamic_temp$year <- as.numeric(biodynamic_temp$year)
 
 map1 <- ggmap(roadmap, base_layer = ggplot(biodynamic_temp, aes(lon, lat))) +
-  geom_point(aes(lon, lat), size = 3, alpha = 0.3) +
+  geom_point(aes(lon, lat), size = 4, alpha = 0.3) +
   labs(title = 'Year: {frame + 2013}', x = '', y = '') +
   theme(text = element_text(size=20), 
         axis.ticks = element_blank(), 
@@ -188,7 +190,7 @@ map1 <- ggmap(roadmap, base_layer = ggplot(biodynamic_temp, aes(lon, lat))) +
   transition_manual(year)
 map1
 
-anim_save("map1.gif", map1, height = 550, width = 550)
+anim_save("map1.gif", map1, height = 700, width = 700)
 ```
 
 
@@ -212,7 +214,7 @@ biodynamic_temp <- biodynamic
 biodynamic_temp$year <- as.numeric(biodynamic_temp$year)
 
 map2 <- ggmap(roadmap, base_layer = ggplot(biodynamic_temp, aes(lon, lat))) +
-  geom_point(aes(lon, lat), size = 3, alpha = 0.3) +
+  geom_point(aes(lon, lat), size = 4, alpha = 0.3) +
   facet_wrap(~type) +
   labs(title = 'Year: {frame + 2013}', x = '', y = '') +
   theme(text = element_text(size=20), 
@@ -221,6 +223,6 @@ map2 <- ggmap(roadmap, base_layer = ggplot(biodynamic_temp, aes(lon, lat))) +
   transition_manual(year)
 map2
 
-anim_save("map2.gif", map2, height = 550, width = 1500)
+anim_save("map2.gif", map2, height = 700, width = 1950)
 ```
 
