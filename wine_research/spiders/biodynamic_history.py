@@ -9,6 +9,12 @@ from wine_research.items import BiodynamicHistoryItem
 class BiodynamicHistorySpider(Spider):
     name = 'BiodynamicHistorySpider'
     start_urls = ['https://web.archive.org/web/20141009050729/http://www.biodynamicfood.org:80/beyond-organic/a']
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'wine_research.pipelines.BiodynamicHistoryPipeline': 300,
+        }
+    }
+
 
     def parse(self, response):
         for organization in response.xpath('//*[starts-with(@class, "abc_list_item index")]'):

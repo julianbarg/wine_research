@@ -75,3 +75,46 @@ class BiodynamicHistoryPipeline(object):
             item['winery'] = True
 
         return item
+
+class CCOFPipeline(object):
+    def process_item(self, item, spider):
+        if item['products']:
+            item['products'] = [product.lower() for product in item['products']]
+
+        if item['crops_license'] != ['']:
+            item['crops_license_status'] = item['crops_license'][3]
+            item['crops_license_date'] = item['crops_license'][5]
+            item['crops_license'] = '\n'.join([element.strip() for element in item['crops_license']]).strip()
+        else:
+            item['crops_license_status'] = ''
+            item['crops_license_date'] = ''
+
+        if (item['crops_license_status'] == 'Certified') and ('grapes (wine)' in item['products']):
+            item['vineyard'] = True
+
+        if item['handling_license'] != ['']:
+            item['handling_license_status'] = item['handling_license'][3]
+            item['handling_license_date'] = item['handling_license'][5]
+            item['handling_license'] = '\n'.join([element.strip() for element in item['handling_license']]).strip()
+        else:
+            item['handling_license_status'] = ''
+            item['handling_license_date'] = ''
+
+        if (item['handling_license_status'] == 'Certified') and ('wine' in item['products']):
+            item['winery'] = True
+
+        if item['USDA_NOP_license'] != ['']:
+            item['USDA_NOP_license_status'] = item['USDA_NOP_license'][3]
+            item['USDA_NOP_license_date'] = item['USDA_NOP_license'][5]
+            item['USDA_NOP_license'] = '\n'.join([element.strip() for element in item['USDA_NOP_license']]).strip()
+        else:
+            item['USDA_NOP_license_status'] = ''
+            item['USDA_NOP_license_date'] = ''
+
+        if (item['handling_license'] != 'Certified') and ('wine' in item['products']):
+            item['organic_grape_wine'] = True
+
+        if item['products']:
+            item['products'] = '\n'.join(item['products'])
+
+        return item
