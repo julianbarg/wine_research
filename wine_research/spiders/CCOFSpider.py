@@ -15,6 +15,7 @@ class CCOFSpider(Spider):
                   + '%29&field_products_services_1=%2C+%22Wine+Bottling+%28Client+Profile+Products+only%29%22%2C'\
                   + '+%22Wine+Making+%28Client+Profile+Products+only%29%22%2C+%22Vinegar+%28Wine%29%22%2C+%22Swine'\
                   + '%22%2C+%22Wine+Bottling%22%2C+%22Wine+Making%22%2C+%22Grapes+%28Wine%29+%28Transitional%29%22']
+
     custom_settings = {
         'ITEM_PIPELINES': {
             'wine_research.pipelines.CCOFPipeline': 300,

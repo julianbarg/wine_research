@@ -23,7 +23,7 @@ class BiodynamicHistoryPipeline(object):
             item['business'] = item['business'][0]
 
         if item['date']:
-            item['date'] = datetime.strptime(item['date'][0], '%Y%m%d').date()
+            item['date'] = datetime.strptime(item['date'][0], '%Y%m%d').strftime('%Y-%m-%d')
 
         if item['address'] and len(item['address']) == 2:
             item['address'] = [element.strip() for element in item['address']]
@@ -118,3 +118,9 @@ class CCOFPipeline(object):
             item['products'] = '\n'.join(item['products'])
 
         return item
+
+
+class LODIPipeline(object):
+    def process_item(self, item, spider):
+        if item['date']:
+            item['date'] = datetime.strptime(item['date'][0], '%Y%m%d').strftime('%Y-%m-%d')

@@ -50,3 +50,11 @@ class CCOFItem(Item):
     website = Field()
     phone = Field()
     facebook = Field()
+
+
+class LODIItem(Item):
+    name = Field()
+    date = Field()
+    address = Field()
+    phone = Field()
+    contact = Field()
